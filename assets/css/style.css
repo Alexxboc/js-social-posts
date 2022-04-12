@@ -3,3 +3,33 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+:root {
+--background_primary: #023047;
+--text_black_light: #070707;
+--text_dark: #101010;
+--text_light: #404040;
+}
+
+main {
+    background-color: var(--background_primary);
+    height: 100vh;
+}
+
+main h1 {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 80px;
+    color: white;
+    font-weight: bold;
+
+}
+
+.post_area {
+    margin: auto;
+    max-width: 1200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 2rem;
+}
