@@ -66,13 +66,10 @@ main h1 {
     font-size: 20px;
 }
 
-.like_section a {
-    text-decoration: none;
-}
-
-.like_section a {
+.post_bottom a {
     color: var(--text_light);
     font-weight: bold;
+    text-decoration: none;
 }
 
 .color_blue {

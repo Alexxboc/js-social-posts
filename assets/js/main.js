@@ -80,7 +80,7 @@ Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i 
 */
 
 // Creo una funzione che generi il markup da inserire nell'html
-function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, main_post_img) {
+function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, main_post_img, post_id_number) {
     return `
     <div class="post">
                 <div class="post_top">
@@ -103,14 +103,14 @@ function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, 
                 </div>
 
                 <div class="post_bottom">
-                    <div class="like_section">
-                        <a href="" class="">
-                            <i class="fa-solid fa-thumbs-up"></i>
-                            <span>Mi Piace</span>
-                        </a>
-                    </div>
+                    <a href="#" class="like_section" id="like-button-${post_id_number}">
+                    
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <span>Mi Piace</span>
+                        
+                    </a>
                     <div class="like_views">
-                        Piace a <strong class="counter"></strong> persone
+                        Piace a <strong class="counter" id="like-counter-${post_id_number}">${getRandomInteger()}</strong> persone
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@ const postAreaElement = document.querySelector(dom_selector);
 array_object.forEach(post => {
     // console.log(post);
     // Genero il markup per ogni singolo post
-    const postMarkup = generatePostMarkup(post.date, post.user_name, post.user_img, post.text, post.main_img)
+    const postMarkup = generatePostMarkup(post.date, post.user_name, post.user_img, post.text, post.main_img, post.post_id)
     // console.log(postMarkup)
     // Inserisco il markup nell'html
     postAreaElement.insertAdjacentHTML("beforeend", postMarkup)
@@ -142,24 +142,42 @@ Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e inc
 Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 */
 
-// Seleziono l'elemento della Dom che scatenerà l'evento
-const likeElements = document.querySelectorAll('.like_section')
-likeElements.forEach(likeElement => {
-    // console.log(likeElement);
-// Creo un evento al click
-    likeElement.addEventListener('click', function (event) {
-    console.log(event);
-    // Prevengo il refresh della pagina 
-    event.preventDefault()
-    // Seleziono gli elementi della dom che devono cambiare colore
-    const changeColorElements = document.querySelector('.like_section a')
-    // console.log(changeColorElements);
-    // Aggiungo una classe che colori il testo e l'icona al click
-    changeColorElements.classList.add('color_blue')
-})
-})
+
+function getRandomInteger() { 
+    return Math.floor(Math.random() * (1480 - 1 + 1)) + 1; 
+}
 
 
 
 
-// Selezi
+
+for(let i = 0; i < posts.length; i++) {
+    const post = posts[i]
+    const buttonElement = document.getElementById('like-button-' + post.post_id)
+    console.log(buttonElement);
+    const counterElement = document.getElementById('like-counter-' + post.post_id)
+    console.log(counterElement);
+    
+
+    buttonElement.addEventListener('click', function(event) {
+        event.preventDefault()
+        
+        buttonElement.classList.toggle('color_blue')
+        counterElement.classList.toggle('color_blue')
+
+        const strongInnerHtml = Number(counterElement.innerHTML)
+        console.log(strongInnerHtml);
+
+        if (counterElement.classList == 'counter color_blue') {
+           
+            counterElement.innerHTML = strongInnerHtml + 1;
+        } else {
+    
+            counterElement.innerHTML = strongInnerHtml - 1;
+        }
+    })
+}
+
+
+
+
