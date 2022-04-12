@@ -104,7 +104,7 @@ function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, 
 
                 <div class="post_bottom">
                     <div class="like_section">
-                        <a href="">
+                        <a href="" class="">
                             <i class="fa-solid fa-thumbs-up"></i>
                             <span>Mi Piace</span>
                         </a>
@@ -133,16 +133,27 @@ array_object.forEach(post => {
 })
 }
 
+// Invoco la funzione che inserisce il markup nell'html
 generatePosts(posts, '.post_area')
 
+/* 
+Milestone 3
+Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. 
+Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+*/
 
-
-
-
-
-
-
-
+// Seleziono l'elemento della Dom che scatenerà l'evento
+const likeElement = document.querySelector('.like_section')
+// Creo un evento al click
+likeElement.addEventListener('click', function (event) {
+    console.log(event);
+    // Prevengo il refresh della pagina 
+    event.preventDefault()
+    // Seleziono gli elementi della dom che devono cambiare colore
+    const changeColorElements = document.querySelector('.like_section a')
+    // console.log(changeColorElements);
+    changeColorElements.classList.toggle('color_blue')
+})
     
     
 

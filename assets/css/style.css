@@ -70,10 +70,13 @@ main h1 {
     text-decoration: none;
 }
 
-.like_section i, .like_section a {
+.like_section a {
     color: var(--text_light);
     font-weight: bold;
 }
 
+.color_blue {
+    color: blue !important;
+}
 
 
