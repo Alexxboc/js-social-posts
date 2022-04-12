@@ -11,9 +11,13 @@
 --text_light: #404040;
 }
 
+img {
+    max-width: 100%;
+}
+
 main {
     background-color: var(--background_primary);
-    height: 100vh;
+    padding: 5rem
 }
 
 main h1 {
@@ -23,13 +27,53 @@ main h1 {
     color: white;
     font-weight: bold;
 
+
+}
+
+.post {
+    background-color: white;
+    padding: 1rem;
 }
 
 .post_area {
     margin: auto;
-    max-width: 1200px;
-    height: 500px;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
-    column-gap: 2rem;
+    row-gap: 2rem;
 }
+
+.post_top {
+    display: flex;
+    column-gap: 2rem;
+    align-items: center;
+}
+
+.post_top img {
+    height: 70px;
+    border-radius: 50%;
+}
+
+.main_text {
+    margin: 1rem 0;
+}
+
+.post_bottom {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    font-size: 20px;
+}
+
+.like_section a {
+    text-decoration: none;
+}
+
+.like_section i, .like_section a {
+    color: var(--text_light);
+    font-weight: bold;
+}
+
+
+
