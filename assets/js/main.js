@@ -110,7 +110,7 @@ function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, 
                         </a>
                     </div>
                     <div class="like_views">
-                        Piace a <strong id="counter">80</strong> persone
+                        Piace a <strong class="counter"></strong> persone
                     </div>
                 </div>
             </div>
@@ -143,19 +143,23 @@ Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 */
 
 // Seleziono l'elemento della Dom che scatenerà l'evento
-const likeElement = document.querySelector('.like_section')
+const likeElements = document.querySelectorAll('.like_section')
+likeElements.forEach(likeElement => {
+    // console.log(likeElement);
 // Creo un evento al click
-likeElement.addEventListener('click', function (event) {
+    likeElement.addEventListener('click', function (event) {
     console.log(event);
     // Prevengo il refresh della pagina 
     event.preventDefault()
     // Seleziono gli elementi della dom che devono cambiare colore
     const changeColorElements = document.querySelector('.like_section a')
     // console.log(changeColorElements);
-    changeColorElements.classList.toggle('color_blue')
+    // Aggiungo una classe che colori il testo e l'icona al click
+    changeColorElements.classList.add('color_blue')
 })
-    
-    
+})
 
 
 
+
+// Selezi
