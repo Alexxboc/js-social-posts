@@ -149,7 +149,7 @@ function getRandomInteger() {
 
 // Dichiaro una variabile per un array vuoto dove verranno salvati gli id dei post ai quali metterò like
 const likesIdList = []
-console.log(likesIdList);
+// console.log(likesIdList);
 // Ciclo all'interno dell'array di oggetti posts
 for(let i = 0; i < posts.length; i++) {
     // Dichiaro una variabile per il singolo post
@@ -175,6 +175,7 @@ for(let i = 0; i < posts.length; i++) {
         // Verifico quando il contatore deve incrementare o decrementare
         if (counterElement.classList == 'counter color_blue') {
             counterElement.innerHTML = strongInnerHtml + 1;
+            // Tengo traccia degli id ai quali ho messo like
             likesIdList.push(post.post_id)
         } else {
             counterElement.innerHTML = strongInnerHtml - 1;
