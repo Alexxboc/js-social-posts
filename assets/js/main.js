@@ -114,7 +114,14 @@ function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, 
                     </div>
                 </div>
             </div>
-    `
+            `
+        }
+        
+        
+        
+// Creo una funzione che generi un numero random per i likes del post
+function getRandomInteger() { 
+    return Math.floor(Math.random() * 10000) 
 }
 
 // Creo una funzione che inserisca il markup nell'html
@@ -142,50 +149,42 @@ Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e inc
 Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 */
 
-// Creo una funzione che generi un numero random per i likes del post
-function getRandomInteger() { 
-    return Math.floor(Math.random() * 10000) 
-}
 
 // Dichiaro una variabile per un array vuoto dove verranno salvati gli id dei post ai quali metterò like
 const likesIdList = []
 // console.log(likesIdList);
 // Ciclo all'interno dell'array di oggetti posts
-for(let i = 0; i < posts.length; i++) {
-    // Dichiaro una variabile per il singolo post
-    const post = posts[i]
-    // Seleziono l'elemento like button attraverso il suo id
-    const buttonElement = document.getElementById('like-button-' + post.post_id)
-    // console.log(buttonElement);
-    // Seleziono l'elemento like counter attraverso il suo id
-    const counterElement = document.getElementById('like-counter-' + post.post_id)
-    // console.log(counterElement);
-    
-// Creo un evento al click del bottone
-    buttonElement.addEventListener('click', function(event) {
-        // Prevengo il comportamento di default
-        event.preventDefault()
-        // Aggiungo la classe che colora il bottone al click
-        buttonElement.classList.toggle('color_blue')
-        // Aggiungo la classe che colora il counter al click
-        counterElement.classList.toggle('color_blue')
-        // Dichiaro una variabile per aggiungere il like al contatore
-        const strongInnerHtml = Number(counterElement.innerHTML)
-        // console.log(strongInnerHtml);
-        // Verifico quando il contatore deve incrementare o decrementare
-        if (counterElement.classList == 'counter color_blue') {
-            counterElement.innerHTML = strongInnerHtml + 1;
-            // Tengo traccia degli id ai quali ho messo like
-            likesIdList.push(post.post_id)
-        } else {
-            counterElement.innerHTML = strongInnerHtml - 1;
-        }
-    })
-}
-           
-    
-
-
+posts.forEach(post => {
+       // Seleziono l'elemento like button attraverso il suo id
+       const buttonElement = document.getElementById('like-button-' + post.post_id)
+       // console.log(buttonElement);
+       // Seleziono l'elemento like counter attraverso il suo id
+       const counterElement = document.getElementById('like-counter-' + post.post_id)
+       // console.log(counterElement);
+       
+   // Creo un evento al click del bottone
+       buttonElement.addEventListener('click', function(event) {
+           // Prevengo il comportamento di default
+           event.preventDefault()
+           console.log(this);
+           // Aggiungo la classe che colora il bottone al click
+           this.classList.toggle('color_blue')
+           // Trasformo il counter in numero
+           const strongInnerHtml = Number(counterElement.innerHTML)
+           // console.log(strongInnerHtml);
+           // Verifico quando il contatore deve incrementare o decrementare
+           if (this.classList == 'like_section color_blue') {
+            // Incremento di uno il contatore
+               counterElement.innerHTML = strongInnerHtml + 1;
+               // Tengo traccia degli id ai quali ho messo like
+               likesIdList.push(post.post_id)
+   
+           } else {
+            // Sottraggo di uno il contatore
+               counterElement.innerHTML = strongInnerHtml - 1;
+           }
+       })
+})
 
 
 
