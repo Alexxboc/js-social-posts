@@ -45,7 +45,7 @@ const posts = [
 
     {
         post_id: 4,
-        user_name: 'Santiago Boccardi',
+        user_name: 'Gioele Boccardi',
         user_img: 'https://picsum.photos/200',
         date: '22/01/2022',
         text: 'Oggi alla partita di calcio ho fatto goal e abbiamo vinto ⚽️',
@@ -152,9 +152,9 @@ Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 
 // Dichiaro una variabile per un array vuoto dove verranno salvati gli id dei post ai quali metterò like
 const likesIdList = []
-// console.log(likesIdList);
+
 // Ciclo all'interno dell'array di oggetti posts
-posts.forEach(post => {
+posts.forEach((post) => {
        // Seleziono l'elemento like button attraverso il suo id
        const buttonElement = document.getElementById('like-button-' + post.post_id)
        // console.log(buttonElement);
@@ -166,7 +166,7 @@ posts.forEach(post => {
        buttonElement.addEventListener('click', function(event) {
            // Prevengo il comportamento di default
            event.preventDefault()
-           console.log(this);
+            //  console.log(this);
            // Aggiungo la classe che colora il bottone al click
            this.classList.toggle('color_blue')
            // Trasformo il counter in numero
@@ -176,15 +176,21 @@ posts.forEach(post => {
            if (this.classList == 'like_section color_blue') {
             // Incremento di uno il contatore
                counterElement.innerHTML = strongInnerHtml + 1;
-               // Tengo traccia degli id ai quali ho messo like
-               likesIdList.push(post.post_id)
+               // Tengo traccia degli id dei post ai quali ho messo like
+                likesIdList.push(post.post_id)
+                
+            } else {
+             // Sottraggo di uno il contatore
+                counterElement.innerHTML = strongInnerHtml - 1;
+                likesIdList.pop(post.post_id)
+            }
+
+            console.log(likesIdList);
+        })
+ })
+
+
    
-           } else {
-            // Sottraggo di uno il contatore
-               counterElement.innerHTML = strongInnerHtml - 1;
-           }
-       })
-})
 
 
 
