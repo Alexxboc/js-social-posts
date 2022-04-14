@@ -171,21 +171,17 @@ posts.forEach((post) => {
         // console.log(userImgElement);
         // Dichiaro una variabile per le iniziali del nome
         const nameInitials = post.user_name.charAt(0).toUpperCase() + post.user_last_name.charAt(0).toUpperCase()
-        console.log(nameInitials);
-        // Dichiaro una variabile con il markup da sostituire
-        // const nameInitialsMarkup = `
-        // <div class="post_top_img" id="image-${post_id_number}">
-        //     <strong class="initials">${nameInitials}</strong>
-        // </div>
-        // ` 
-        
-        console.log(post.user_img);
+        // console.log(nameInitials);
+        // console.log(post.user_img);
         if(post.user_img === '') {
             userImgElement.outerHTML = `<div class="initials_container">
             <strong class="initials">${nameInitials}</strong>
         </div>
         `
         }
+    
+        
+        
      
        
    // Creo un evento al click del bottone
