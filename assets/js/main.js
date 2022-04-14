@@ -14,7 +14,8 @@ numero di likes.
 const posts = [
     {
         post_id: 1,
-        user_name: 'Alessandro Boccardi',
+        user_name: 'Alessandro',
+        user_last_name: 'Boccardi',
         user_img: 'https://picsum.photos/200',
         date: '03/12/2022',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ',
@@ -24,7 +25,8 @@ const posts = [
 
     {
         post_id: 2,
-        user_name: 'Antonella Riccio',
+        user_name: 'Antonella',
+        user_last_name: 'Riccio',
         user_img: 'https://picsum.photos/200',
         date: '05/10/2022',
         text: 'Viva la vida 😍',
@@ -34,7 +36,8 @@ const posts = [
 
     {
         post_id: 3,
-        user_name: 'Santiago Boccardi',
+        user_name: 'Santiago',
+        user_last_name: 'Boccardi',
         user_img: 'https://picsum.photos/200',
         date: '22/01/2022',
         text: 'Mi piace super mario 👨🏻!',
@@ -44,7 +47,8 @@ const posts = [
 
     {
         post_id: 4,
-        user_name: 'Gioele Boccardi',
+        user_name: 'Gioele',
+        user_last_name: 'Boccardi',
         user_img: '',
         date: '22/01/2022',
         text: 'Oggi alla partita di calcio ho fatto goal e abbiamo vinto ⚽️',
@@ -54,7 +58,8 @@ const posts = [
 
     {
         post_id: 5,
-        user_name: 'Giuliana Bianchi',
+        user_name: 'Giuliana',
+        user_last_name: 'Bianchi',
         user_img: 'https://picsum.photos/200',
         date: '22/01/2022',
         text: '👵🏻 👵🏻 👵🏻',
@@ -64,7 +69,8 @@ const posts = [
 
     {
         post_id: 6,
-        user_name: 'Federico Boccardi',
+        user_name: 'Federico',
+        user_last_name: 'Boccardi',
         user_img: '',
         date: '22/01/2022',
         text: 'Buongiorno Kafèèèèèè ☕️ ???',
@@ -79,15 +85,15 @@ Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i 
 */
 
 // Creo una funzione che generi il markup da inserire nell'html
-function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, main_post_img, post_id_number) {
+function generatePostMarkup(post_date,user_post_name, user_last_name, user_post_img, post_text, main_post_img, post_id_number) {
     return `
     <div class="post">
                 <div class="post_top">
-                    <div class="post_top_img">
+                    <div class="post_top_img" >
                         <img src="${user_post_img}" alt="" id="image-${post_id_number}">
                     </div>
                     <div class="user">
-                        <div class="user_name">${user_post_name}</div>
+                        <div class="user_name">${user_post_name} ${user_last_name}</div>
                         <div class="date">${post_date}</div>
                     </div>
                 </div>
@@ -103,18 +109,18 @@ function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, 
 
                 <div class="post_bottom">
                     <a href="#" class="like_section" id="like-button-${post_id_number}">
-                    
                         <i class="fa-solid fa-thumbs-up"></i>
                         <span>Mi Piace</span>
-                        
                     </a>
-                    <div class="like_views">
-                        Piace a <strong class="counter" id="like-counter-${post_id_number}">${getRandomInteger()}</strong> persone
+                        <div class="like_views">
+                            Piace a <strong class="counter" id="like-counter-${post_id_number}">${getRandomInteger()}</strong> persone
+                        </div>
                     </div>
                 </div>
-            </div>
-            `
-        }
+                `
+            }
+                    
+                        
         
         
         
@@ -132,7 +138,7 @@ const postAreaElement = document.querySelector(dom_selector);
 array_object.forEach(post => {
     // console.log(post);
     // Genero il markup per ogni singolo post
-    const postMarkup = generatePostMarkup(post.date, post.user_name, post.user_img, post.text, post.main_img, post.post_id)
+    const postMarkup = generatePostMarkup(post.date, post.user_name, post.user_last_name, post.user_img, post.text, post.main_img, post.post_id)
     // console.log(postMarkup)
     // Inserisco il markup nell'html
     postAreaElement.insertAdjacentHTML("beforeend", postMarkup)
@@ -160,10 +166,27 @@ posts.forEach((post) => {
        // Seleziono l'elemento like counter attraverso il suo id
        const counterElement = document.getElementById('like-counter-' + post.post_id)
        // console.log(counterElement);
-    // Seleziono l'elemento della dom che contiene la data
-        // const dateElement = document.querySelector('.date');
-        // dateElement.innerHTML = post.date.split('').join().re
-        // console.log(dateElement);
+    // Seleziono l'elemento user img attraverso il suo id
+        const userImgElement = document.getElementById('image-' + post.post_id) 
+        // console.log(userImgElement);
+        // Dichiaro una variabile per le iniziali del nome
+        const nameInitials = post.user_name.charAt(0).toUpperCase() + post.user_last_name.charAt(0).toUpperCase()
+        console.log(nameInitials);
+        // Dichiaro una variabile con il markup da sostituire
+        // const nameInitialsMarkup = `
+        // <div class="post_top_img" id="image-${post_id_number}">
+        //     <strong class="initials">${nameInitials}</strong>
+        // </div>
+        // ` 
+        
+        console.log(post.user_img);
+        if(post.user_img === '') {
+            userImgElement.outerHTML = `<div class="initials_container">
+            <strong class="initials">${nameInitials}</strong>
+        </div>
+        `
+        }
+     
        
    // Creo un evento al click del bottone
        buttonElement.addEventListener('click', function(event) {
@@ -191,11 +214,6 @@ posts.forEach((post) => {
             console.log(likesIdList);
         })
  })
-
-
-
-
-
 
 
 
