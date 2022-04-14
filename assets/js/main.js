@@ -11,7 +11,6 @@ numero di likes.
 */
 
 // Creo un array di oggetti che rappresenti il post
-
 const posts = [
     {
         post_id: 1,
@@ -161,6 +160,10 @@ posts.forEach((post) => {
        // Seleziono l'elemento like counter attraverso il suo id
        const counterElement = document.getElementById('like-counter-' + post.post_id)
        // console.log(counterElement);
+    // Seleziono l'elemento della dom che contiene la data
+        const dateElement = document.querySelector('.date');
+        dateElement.innerHTML = post.date.split('').join().re
+        console.log(dateElement);
        
    // Creo un evento al click del bottone
        buttonElement.addEventListener('click', function(event) {
@@ -173,7 +176,7 @@ posts.forEach((post) => {
            const strongInnerHtml = Number(counterElement.innerHTML)
            // console.log(strongInnerHtml);
            // Verifico quando il contatore deve incrementare o decrementare
-           if (this.classList == 'like_section color_blue') {
+           if (this.classList.contains('color_blue')) {
             // Incremento di uno il contatore
                counterElement.innerHTML = strongInnerHtml + 1;
                // Tengo traccia degli id dei post ai quali ho messo like
@@ -190,7 +193,6 @@ posts.forEach((post) => {
  })
 
 
-   
 
 
 
