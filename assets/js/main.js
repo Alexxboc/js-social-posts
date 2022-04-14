@@ -84,7 +84,7 @@ function generatePostMarkup(post_date,user_post_name, user_post_img, post_text, 
     <div class="post">
                 <div class="post_top">
                     <div class="post_top_img">
-                        <img src="${user_post_img}" alt="">
+                        <img src="${user_post_img}" alt="" id="image-${post_id_number}">
                     </div>
                     <div class="user">
                         <div class="user_name">${user_post_name}</div>
