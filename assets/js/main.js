@@ -27,7 +27,7 @@ const posts = [
         user_name: 'Antonella Riccio',
         user_img: 'https://picsum.photos/200',
         date: '05/10/2022',
-        text: 'Viva la vida',
+        text: 'Viva la vida 😍',
         main_img: 'https://picsum.photos/800/400',
         likes: '1200'
     },
@@ -45,7 +45,7 @@ const posts = [
     {
         post_id: 4,
         user_name: 'Gioele Boccardi',
-        user_img: 'https://picsum.photos/200',
+        user_img: '',
         date: '22/01/2022',
         text: 'Oggi alla partita di calcio ho fatto goal e abbiamo vinto ⚽️',
         main_img: '',
@@ -65,7 +65,7 @@ const posts = [
     {
         post_id: 6,
         user_name: 'Federico Boccardi',
-        user_img: 'https://picsum.photos/200',
+        user_img: '',
         date: '22/01/2022',
         text: 'Buongiorno Kafèèèèèè ☕️ ???',
         main_img: '',
@@ -161,9 +161,9 @@ posts.forEach((post) => {
        const counterElement = document.getElementById('like-counter-' + post.post_id)
        // console.log(counterElement);
     // Seleziono l'elemento della dom che contiene la data
-        const dateElement = document.querySelector('.date');
-        dateElement.innerHTML = post.date.split('').join().re
-        console.log(dateElement);
+        // const dateElement = document.querySelector('.date');
+        // dateElement.innerHTML = post.date.split('').join().re
+        // console.log(dateElement);
        
    // Creo un evento al click del bottone
        buttonElement.addEventListener('click', function(event) {

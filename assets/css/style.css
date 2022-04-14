@@ -11,13 +11,18 @@
 --text_light: #404040;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 img {
     max-width: 100%;
 }
 
 main {
     background-color: var(--background_primary);
-    padding: 5rem
+    padding: 2rem;
+
 }
 
 main h1 {
@@ -52,6 +57,11 @@ main h1 {
 .post_top img {
     height: 70px;
     border-radius: 50%;
+}
+
+.post_top .date {
+    font-size: 13px;
+    color: var(--text_light);
 }
 
 .main_text {
