@@ -39,7 +39,7 @@ const posts = [
         user_name: 'Santiago',
         user_last_name: 'Boccardi',
         user_img: 'https://picsum.photos/200',
-        date: '22/01/2022',
+        date: '10/01/2022',
         text: 'Mi piace super mario 👨🏻!',
         main_img: 'https://picsum.photos/800/400',
         likes: '150'
@@ -50,7 +50,7 @@ const posts = [
         user_name: 'Gioele',
         user_last_name: 'Boccardi',
         user_img: '',
-        date: '22/01/2022',
+        date: '11/07/2022',
         text: 'Oggi alla partita di calcio ho fatto goal e abbiamo vinto ⚽️',
         main_img: '',
         likes: '2150'
@@ -61,7 +61,7 @@ const posts = [
         user_name: 'Giuliana',
         user_last_name: 'Bianchi',
         user_img: 'https://picsum.photos/200',
-        date: '22/01/2022',
+        date: '07/18/2022',
         text: '👵🏻 👵🏻 👵🏻',
         main_img: '',
         likes: '20'
@@ -72,7 +72,7 @@ const posts = [
         user_name: 'Federico',
         user_last_name: 'Boccardi',
         user_img: '',
-        date: '22/01/2022',
+        date: '09/25/2022',
         text: 'Buongiorno Kafèèèèèè ☕️ ???',
         main_img: '',
         likes: '1'
@@ -112,9 +112,9 @@ function generatePostMarkup(post_date,user_post_name, user_last_name, user_post_
                         <i class="fa-solid fa-thumbs-up"></i>
                         <span>Mi Piace</span>
                     </a>
-                        <div class="like_views">
-                            Piace a <strong class="counter" id="like-counter-${post_id_number}">${getRandomInteger()}</strong> persone
-                        </div>
+                    <div class="like_views">
+                        Piace a <strong class="counter" id="like-counter-${post_id_number}">${getRandomInteger()}</strong> persone
+                    </div>
                     </div>
                 </div>
                 `
@@ -160,6 +160,7 @@ const likesIdList = []
 
 // Ciclo all'interno dell'array di oggetti posts
 posts.forEach((post) => {
+        
        // Seleziono l'elemento like button attraverso il suo id
        const buttonElement = document.getElementById('like-button-' + post.post_id)
        // console.log(buttonElement);
@@ -177,39 +178,48 @@ posts.forEach((post) => {
             userImgElement.outerHTML = `<div class="initials_container">
             <strong class="initials">${nameInitials}</strong>
         </div>
-        `
+        `;
         }
-    
+        // Invoco la funzione che cambia la data 
+        post.date = changeDate(post.date)
+        console.log(post.date);
+        
+    // Creo un evento al click del bottone
+        buttonElement.addEventListener('click', function(event) {
+            // Prevengo il comportamento di default
+            event.preventDefault()
+             //  console.log(this);
+            // Aggiungo la classe che colora il bottone al click
+            this.classList.toggle('color_blue')
+            // Trasformo il counter in numero
+            const strongInnerHtml = Number(counterElement.innerHTML)
+            // console.log(strongInnerHtml);
+            // Verifico quando il contatore deve incrementare o decrementare
+            if (this.classList.contains('color_blue')) {
+             // Incremento di uno il contatore
+                counterElement.innerHTML = strongInnerHtml + 1;
+                // Tengo traccia degli id dei post ai quali ho messo like
+                 likesIdList.push(post.post_id)
+                 
+             } else {
+              // Sottraggo di uno il contatore
+                 counterElement.innerHTML = strongInnerHtml - 1;
+                 likesIdList.pop(post.post_id)
+             }
+ 
+             console.log(likesIdList);
+         })
+  })
+ 
+//  Creo una funzione che cambi il formato della data
+ function changeDate (object_date) {
+     let euroDate = new Date(object_date)
+     return `${euroDate.getDate()} / ${euroDate.getMonth() + 1} / ${euroDate.getFullYear()}`
+ }
+        
+        
+
+
         
         
      
-       
-   // Creo un evento al click del bottone
-       buttonElement.addEventListener('click', function(event) {
-           // Prevengo il comportamento di default
-           event.preventDefault()
-            //  console.log(this);
-           // Aggiungo la classe che colora il bottone al click
-           this.classList.toggle('color_blue')
-           // Trasformo il counter in numero
-           const strongInnerHtml = Number(counterElement.innerHTML)
-           // console.log(strongInnerHtml);
-           // Verifico quando il contatore deve incrementare o decrementare
-           if (this.classList.contains('color_blue')) {
-            // Incremento di uno il contatore
-               counterElement.innerHTML = strongInnerHtml + 1;
-               // Tengo traccia degli id dei post ai quali ho messo like
-                likesIdList.push(post.post_id)
-                
-            } else {
-             // Sottraggo di uno il contatore
-                counterElement.innerHTML = strongInnerHtml - 1;
-                likesIdList.pop(post.post_id)
-            }
-
-            console.log(likesIdList);
-        })
- })
-
-
-
