@@ -180,7 +180,7 @@ Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e inc
 Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 */
 
-// Dichiaro una variabile per un array vuoto dove verranno salvati gli id dei post ai quali metterò like
+// Dichiaro una variabile per un array vuoto che tiene traccia degli id dei post ai quali metto like
 const likesIdList = []
 
 // Ciclo all'interno dell'array di oggetti posts
@@ -211,17 +211,19 @@ posts.forEach((post) => {
             counterElement.innerHTML = strongInnerHtml + 1;
             // Pusho nell'array l'id dei post ai quali metto like
             likesIdList.push(post.post_id)
+            console.log(likesIdList);
             
         } else {
             // Sottraggo di uno il contatore
             counterElement.innerHTML = strongInnerHtml - 1;
             // Tolgo dall'array l'id dei post ai quale tolgo il like
                  likesIdList.pop(post.post_id)
+                 console.log(likesIdList);
                 }
-                
-                console.log(likesIdList);
             })
         })
+                
+                
 
 
 
