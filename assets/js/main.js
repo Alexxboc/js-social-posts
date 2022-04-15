@@ -94,7 +94,7 @@ function generatePostMarkup(post_date,user_post_name, user_last_name, user_post_
                     </div>
                     <div class="user">
                         <div class="user_name">${user_post_name} ${user_last_name}</div>
-                        <div class="date">${post_date}</div>
+                        <div class="date">${changeDate(post_date)}</div>
                     </div>
                 </div>
                 <div class="main_text">
@@ -181,8 +181,8 @@ posts.forEach((post) => {
         `;
         }
         // Invoco la funzione che cambia la data 
-        post.date = changeDate(post.date)
-        console.log(post.date);
+        // post.date = changeDate(post.date)
+        // console.log(post.date);
         
     // Creo un evento al click del bottone
         buttonElement.addEventListener('click', function(event) {
@@ -214,7 +214,7 @@ posts.forEach((post) => {
 //  Creo una funzione che cambi il formato della data
  function changeDate (object_date) {
      let euroDate = new Date(object_date)
-     return `${euroDate.getDate()} / ${euroDate.getMonth() + 1} / ${euroDate.getFullYear()}`
+     return `${euroDate.getDate()}/${euroDate.getMonth() + 1}/${euroDate.getFullYear()}`
  }
         
         
