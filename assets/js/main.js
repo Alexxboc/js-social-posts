@@ -120,10 +120,6 @@ function generatePostMarkup(post_date,user_post_name, user_last_name, user_post_
                 `
             }
                     
-                        
-        
-        
-        
 // Creo una funzione che generi un numero random per i likes del post
 function getRandomInteger() { 
     return Math.floor(Math.random() * 10000) 
@@ -184,9 +180,6 @@ Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e inc
 Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 */
 
-
-
-
 // Dichiaro una variabile per un array vuoto dove verranno salvati gli id dei post ai quali metterò like
 const likesIdList = []
 
@@ -216,18 +209,22 @@ posts.forEach((post) => {
         if (this.classList.contains('color_blue')) {
             // Incremento di uno il contatore
             counterElement.innerHTML = strongInnerHtml + 1;
-            // Tengo traccia degli id dei post ai quali ho messo like
+            // Pusho nell'array l'id dei post ai quali metto like
             likesIdList.push(post.post_id)
             
         } else {
             // Sottraggo di uno il contatore
             counterElement.innerHTML = strongInnerHtml - 1;
+            // Tolgo dall'array l'id dei post ai quale tolgo il like
                  likesIdList.pop(post.post_id)
                 }
                 
                 console.log(likesIdList);
             })
         })
+
+
+
         
         
         
