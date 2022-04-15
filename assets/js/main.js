@@ -145,6 +145,36 @@ array_object.forEach(post => {
 })
 }
 
+//  Creo una funzione che cambi il formato della data
+function changeDate (object_date) {
+    //  Dichiaro una variabile con la data attuale
+     let euroDate = new Date(object_date)
+    // Inverto l'ordine del giorno e del mese
+     return `${euroDate.getDate()}/${euroDate.getMonth() + 1}/${euroDate.getFullYear()}`
+ }
+
+// Creo una funzione che estrapoli le iniziali da nome e cognome
+function createInitials(post_id_number, post_user_name, post_last_name, post_user_img) {
+     // Seleziono l'elemento user img attraverso il suo id
+     const userImgElement = document.getElementById('image-' + post_id_number) 
+     // console.log(userImgElement);
+     // Dichiaro una variabile per le iniziali del nome
+     const nameInitials = post_user_name.charAt(0).toUpperCase() + post_last_name.charAt(0).toUpperCase()
+     // console.log(nameInitials);
+     // console.log(post.user_img);
+     if(post_user_img === '') {
+         userImgElement.outerHTML = generateInitialsMarkup(nameInitials)
+     }
+}
+
+// Creo una funzione che generi il markup per le iniziali di nome e cognome
+function generateInitialsMarkup(name_initials) {
+    return `<div class="initials_container">
+    <strong class="initials">${name_initials}</strong>
+</div>
+`
+}
+
 // Invoco la funzione che inserisce il markup nell'html
 generatePosts(posts, '.post_area')
 
@@ -155,71 +185,54 @@ Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
 */
 
 
+
+
 // Dichiaro una variabile per un array vuoto dove verranno salvati gli id dei post ai quali metterò like
 const likesIdList = []
 
 // Ciclo all'interno dell'array di oggetti posts
 posts.forEach((post) => {
-        
-       // Seleziono l'elemento like button attraverso il suo id
-       const buttonElement = document.getElementById('like-button-' + post.post_id)
-       // console.log(buttonElement);
-       // Seleziono l'elemento like counter attraverso il suo id
-       const counterElement = document.getElementById('like-counter-' + post.post_id)
-       // console.log(counterElement);
-    // Seleziono l'elemento user img attraverso il suo id
-        const userImgElement = document.getElementById('image-' + post.post_id) 
-        // console.log(userImgElement);
-        // Dichiaro una variabile per le iniziali del nome
-        const nameInitials = post.user_name.charAt(0).toUpperCase() + post.user_last_name.charAt(0).toUpperCase()
-        // console.log(nameInitials);
-        // console.log(post.user_img);
-        if(post.user_img === '') {
-            userImgElement.outerHTML = `<div class="initials_container">
-            <strong class="initials">${nameInitials}</strong>
-        </div>
-        `;
-        }
-        // Invoco la funzione che cambia la data 
-        // post.date = changeDate(post.date)
-        // console.log(post.date);
-        
+    
+    // Seleziono l'elemento like button attraverso il suo id
+    const buttonElement = document.getElementById('like-button-' + post.post_id)
+    // console.log(buttonElement);
+    // Seleziono l'elemento like counter attraverso il suo id
+    const counterElement = document.getElementById('like-counter-' + post.post_id)
+    // console.log(counterElement);
+    // Invoco la funzione che trasforma l'user_img senza foto in iniziali
+    createInitials(post.post_id, post.user_name, post.user_last_name, post.user_img)
+    
     // Creo un evento al click del bottone
-        buttonElement.addEventListener('click', function(event) {
-            // Prevengo il comportamento di default
-            event.preventDefault()
-             //  console.log(this);
-            // Aggiungo la classe che colora il bottone al click
-            this.classList.toggle('color_blue')
-            // Trasformo il counter in numero
-            const strongInnerHtml = Number(counterElement.innerHTML)
-            // console.log(strongInnerHtml);
-            // Verifico quando il contatore deve incrementare o decrementare
-            if (this.classList.contains('color_blue')) {
-             // Incremento di uno il contatore
-                counterElement.innerHTML = strongInnerHtml + 1;
-                // Tengo traccia degli id dei post ai quali ho messo like
-                 likesIdList.push(post.post_id)
-                 
-             } else {
-              // Sottraggo di uno il contatore
-                 counterElement.innerHTML = strongInnerHtml - 1;
+    buttonElement.addEventListener('click', function(event) {
+        // Prevengo il comportamento di default
+        event.preventDefault()
+        //  console.log(this);
+        // Aggiungo la classe che colora il bottone al click
+        this.classList.toggle('color_blue')
+        // Trasformo il counter in numero
+        const strongInnerHtml = Number(counterElement.innerHTML)
+        // console.log(strongInnerHtml);
+        // Verifico quando il contatore deve incrementare o decrementare
+        if (this.classList.contains('color_blue')) {
+            // Incremento di uno il contatore
+            counterElement.innerHTML = strongInnerHtml + 1;
+            // Tengo traccia degli id dei post ai quali ho messo like
+            likesIdList.push(post.post_id)
+            
+        } else {
+            // Sottraggo di uno il contatore
+            counterElement.innerHTML = strongInnerHtml - 1;
                  likesIdList.pop(post.post_id)
-             }
- 
-             console.log(likesIdList);
-         })
-  })
- 
-//  Creo una funzione che cambi il formato della data
- function changeDate (object_date) {
-     let euroDate = new Date(object_date)
-     return `${euroDate.getDate()}/${euroDate.getMonth() + 1}/${euroDate.getFullYear()}`
- }
+                }
+                
+                console.log(likesIdList);
+            })
+        })
         
         
-
-
+        
+        
+        
         
         
      
